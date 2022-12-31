@@ -1,0 +1,18 @@
+volumes:
+  valheim_data:
+    driver: local
+  valheim_config:
+    driver: local
+  
+services: 
+  valheim: 
+    image: valheim-server
+    volumes: 
+      - valheim_data:/valheim
+      - valheim_config:/home/valheim/.config
+    ports: 
+      - "2456-2457:2456-2457/udp"
+      - "9001:9001/tcp"
+    env_file:
+      - valheim.env
+    restart: always
